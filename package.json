@@ -1,0 +1,22 @@
+{
+  "name": "nodeapp",
+  "version": "1.0.0",
+  "description": "This is app based on node js and mongo db which aims to add and list products in grocery.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yatingupta1493/nodeapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yatingupta1493/nodeapp/issues"
+  },
+  "homepage": "https://github.com/yatingupta1493/nodeapp#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
