@@ -1,9 +1,6 @@
-const express = require('express');
-const router = express.Router();
-
 router.get("/about", function(request, response) {
-  console.log(request.url);
-  console.log("About Yatin");
+  console.log(apiRoot);
+  response.render("index", {apiRoot: apiRoot});
   response.end();
 });
 
