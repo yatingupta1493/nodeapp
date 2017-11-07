@@ -1,36 +1,17 @@
-router.get("/about", function(request, response) {
-  console.log(apiRoot);
-  response.render("index", {apiRoot: apiRoot});
-  response.end();
-});
+const express = require('express');
+const path = require('path');
+const router = express.Router();
 
-router.get("/experience", function(request, response) {
-  console.log(request.url);
-  console.log("Experience Yatin");
-  response.end();
-});
-
-router.get("/education", function(request, response) {
-  console.log(request.url);
-  console.log("Education Yatin");
-  response.end();
-});
-
-router.get("/skills", function(request, response) {
-  console.log(request.url);
-  console.log("Skills Yatin");
-  response.end();
-});
-
-router.get("/interests", function(request, response) {
-  console.log(request.url);
-  console.log("Interest Yatin");
-  response.end();
-});
-
-router.get("/awards", function(request, response) {
-  console.log(request.url);
-  console.log("Awards Yatin");
+router.get("/:type", function(request, response) {
+  var requestType = request.params.type;
+  var requestTypes = [ "about", "experience", "education", "skills", "interests", "awards" ];
+  if(requestTypes.indexOf(requestType) === -1) {
+    response.render("404");
+  }
+  else {
+    var data = { type:requestType };
+    response.render("index", {data: data});
+  }
   response.end();
 });
 

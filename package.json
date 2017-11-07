@@ -18,6 +18,8 @@
   "homepage": "https://github.com/yatingupta1493/nodeapp#readme",
   "dependencies": {
     "ejs": "^2.5.7",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "jquery-scrollTo": "^0.2.2",
+    "mongoose": "^4.13.0"
   }
 }
