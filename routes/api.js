@@ -6,26 +6,39 @@ const personCollection = require(appRoot + "/models/personModel");
 const experienceCollection = require(appRoot + "/models/experienceModel");
 var pageTypes = [];
 var persons = [];
-var experience = [];
+var experiences = [];
 
 (function(){
   pagesCollection.find({}, {pageType: true}).then(function(results){
      results.forEach(function(element) {
         pageTypes.push(element.pageType.toLowerCase());
     });
-  }); 
+  });
 })();
 
 (function(){
   personCollection.find({}).then(function(results){
      persons = results;
-  }); 
+  });
 })();
 
 (function(){
+  var date;
+  const locale = "en-IN";
   experienceCollection.find({}).then(function(results){
-     experience = results;
-  }); 
+    results.forEach(function(result) {
+      date = new Date(result.join_time);
+      result.join_time = date.toLocaleString(locale, {month: 'long'}) + " " + date.toLocaleString(locale, {year: 'numeric'});
+      if(result.end_time.toLowerCase() === "current") {
+        result.end_time = "Present";
+      }
+      else {
+        date = new Date(result.end_time);
+        result.end_time = date.toLocaleString(locale, {month: 'long'}) + " " + date.toLocaleString(locale, {year: 'numeric'});
+      }
+      experiences.push(result);
+    });
+  });
 })();
 
 
@@ -39,10 +52,10 @@ router.get("/:type", function(request, response) {
       data["person"] = persons;
       data["type"] = pageType;
       data["types"] = pageTypes;
-      console.log(experience);
+      data["experiences"] = experiences;
       response.render("index", {data: data});
       response.end();
-      
+
     }
 });
 
