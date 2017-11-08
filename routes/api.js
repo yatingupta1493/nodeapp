@@ -15,14 +15,13 @@ router.get("/:type", function(request, response) {
     }
     else {
       var data = {};
-        const personalityCollection = require(appRoot + "/models/personalityModel");
-        console.log(personalityCollection);
-        personalityCollection.find({}).then(function(objArray){
-            data["personality"] = objArray;
+        const personCollection = require(appRoot + "/models/personModel");
+        console.log(personCollection);
+        personCollection.find({}).then(function(objArray){
+            console.log(objArray);
+            data["person"] = objArray;
             data["type"] = pageType;
             data["types"] = pageTypes;
-            console.log("---data---");
-            console.log(data);
             response.render("index", {data: data});
             response.end();
         });

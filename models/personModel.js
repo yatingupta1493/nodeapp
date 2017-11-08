@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
-const personalitySchema = new schema({
+const personSchema = new schema({
 	first_name: {
 		type: String,
 		required: [true, 'First Name is required']
@@ -22,7 +22,7 @@ const personalitySchema = new schema({
 		type: String,
 		required: [true, 'Interests Type is required']
 	}
-});
+}, {collection: 'person'});
 
-const personalityModel = mongoose.model('personality', personalitySchema);
-module.exports = personalityModel;
+const personModel = mongoose.model('person', personSchema);
+module.exports = personModel;
