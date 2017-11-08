@@ -2,36 +2,48 @@ const express = require('express');
 const path = require('path');
 const router = express.Router();
 const pagesCollection = require(appRoot + "/models/pageModel");
+const personCollection = require(appRoot + "/models/personModel");
+const experienceCollection = require(appRoot + "/models/experienceModel");
+var pageTypes = [];
+var persons = [];
+var experience = [];
+
+(function(){
+  pagesCollection.find({}, {pageType: true}).then(function(results){
+     results.forEach(function(element) {
+        pageTypes.push(element.pageType.toLowerCase());
+    });
+  }); 
+})();
+
+(function(){
+  personCollection.find({}).then(function(results){
+     persons = results;
+  }); 
+})();
+
+(function(){
+  experienceCollection.find({}).then(function(results){
+     experience = results;
+  }); 
+})();
+
 
 router.get("/:type", function(request, response) {
   var pageType = request.params.type;
-  var pageTypes = []
-  pagesCollection.find({}, {pageType: true}).then(function(objArray){
-    objArray.forEach(function(element) {
-      pageTypes.push(element.pageType.toLowerCase());
-    });
     if(pageTypes.indexOf(pageType) === -1) {
       response.render("404");
     }
     else {
       var data = {};
-        const personCollection = require(appRoot + "/models/personModel");
-        console.log(personCollection);
-        personCollection.find({}).then(function(objArray){
-            console.log(objArray);
-            data["person"] = objArray;
-            data["type"] = pageType;
-            data["types"] = pageTypes;
-            response.render("index", {data: data});
-            response.end();
-        });
+      data["person"] = persons;
+      data["type"] = pageType;
+      data["types"] = pageTypes;
+      console.log(experience);
+      response.render("index", {data: data});
+      response.end();
       
     }
-    //var requestTypesAr = objArray.map(function(a) {return a.pageType.toLowerCase();});
-    
-  });
-  //var requestTypes = [ "about", "experience", "education", "skills", "interests", "awards" ];
-  
 });
 
 module.exports = router;
