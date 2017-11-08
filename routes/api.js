@@ -4,9 +4,11 @@ const router = express.Router();
 const pagesCollection = require(appRoot + "/models/pageModel");
 const personCollection = require(appRoot + "/models/personModel");
 const experienceCollection = require(appRoot + "/models/experienceModel");
+const educationCollection = require(appRoot + "/models/educationModel");
 var pageTypes = [];
 var persons = [];
 var experiences = [];
+var educations = [];
 
 (function(){
   pagesCollection.find({}, {pageType: true}).then(function(results){
@@ -19,6 +21,12 @@ var experiences = [];
 (function(){
   personCollection.find({}).then(function(results){
      persons = results;
+  });
+})();
+
+(function(){
+  educationCollection.find({}).then(function(results){
+     educations = results;
   });
 })();
 
@@ -53,6 +61,7 @@ router.get("/:type", function(request, response) {
       data["type"] = pageType;
       data["types"] = pageTypes;
       data["experiences"] = experiences;
+      data["educations"] = educations;
       response.render("index", {data: data});
       response.end();
 
