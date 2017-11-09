@@ -5,10 +5,15 @@ const pagesCollection = require(appRoot + "/models/pageModel");
 const personCollection = require(appRoot + "/models/personModel");
 const experienceCollection = require(appRoot + "/models/experienceModel");
 const educationCollection = require(appRoot + "/models/educationModel");
+const skillsCollection = require(appRoot + "/models/skillsModel");
+const awardsCollection = require(appRoot + "/models/awardsModel");
+
 var pageTypes = [];
 var persons = [];
 var experiences = [];
 var educations = [];
+var skills = [];
+var awards = [];
 
 (function(){
   pagesCollection.find({}, {pageType: true}).then(function(results){
@@ -27,6 +32,18 @@ var educations = [];
 (function(){
   educationCollection.find({}).then(function(results){
      educations = results;
+  });
+})();
+
+(function(){
+  skillsCollection.find({}).then(function(results){
+     skills = results;
+  });
+})();
+
+(function(){
+  awardsCollection.find({}).then(function(results){
+     awards = results;
   });
 })();
 
@@ -62,6 +79,8 @@ router.get("/:type", function(request, response) {
       data["types"] = pageTypes;
       data["experiences"] = experiences;
       data["educations"] = educations;
+      data["skills"] = skills;
+      data["awards"] = awards;
       response.render("index", {data: data});
       response.end();
 

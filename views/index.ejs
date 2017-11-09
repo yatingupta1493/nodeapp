@@ -102,39 +102,15 @@
 
           <div class="subheading mb-3">Programming Languages &amp; Tools</div>
           <ul class="list-inline list-icons">
-            <li class="list-inline-item">
-              <i class="devicons devicons-html5"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicons devicons-css3"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicons devicons-javascript"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicons devicons-jquery"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicons devicons-sass"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicons devicons-less"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicons devicons-bootstrap"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicons devicons-wordpress"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicons devicons-grunt"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicons devicons-gulp"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicons devicons-npm"></i>
-            </li>
+            <%
+            data.skills.forEach(function(skill) {
+            %>
+              <li class="list-inline-item" title="<%=  skill.icon %>">
+                <i class="devicons <%=  skill.class %>"></i>
+              </li>
+            <%
+            });
+            %>
           </ul>
 
           <div class="subheading mb-3">Workflow</div>
@@ -166,7 +142,16 @@
         <div class="my-auto">
           <h2 class="mb-5">Awards &amp; Certifications</h2>
           <ul class="fa-ul mb-0">
-            <li>
+            <%
+            data.awards.forEach(function(award){
+            %>
+              <li>
+              <i class="fa-li fa fa-trophy text-warning"></i>
+              <%= award.name %></li>
+            <%
+            });
+            %>
+            <!--<li>
               <i class="fa-li fa fa-trophy text-warning"></i>
               Google Analytics Certified Developer</li>
             <li>
@@ -192,7 +177,7 @@
             <li>
               <i class="fa-li fa fa-trophy text-warning"></i>
               3<sup>rd</sup>
-              Place - James Buchanan High School - Hackathon 2005</li>
+              Place - James Buchanan High School - Hackathon 2005</li>-->
           </ul>
         </div>
       </section>
